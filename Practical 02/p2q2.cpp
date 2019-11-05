@@ -4,7 +4,7 @@
 #include <iostream>
 #include <conio.h>
 
-//#pragma comment (lib, "OpenGL32.lib")
+#pragma comment (lib, "OpenGL32.lib")
 
 #define WINDOW_TITLE "OpenGL Window"
 
@@ -103,27 +103,33 @@ bool initPixelFormat(HDC hdc)
 }
 //--------------------------------------------------------------------
 
+void drawTriangle(float angle) {
+	glPushMatrix();
+	//glRotatef(1, 0.001f, 0.001f, 0.001f);
+	glRotatef(angle, 0, 0, 1);
+	glBegin(GL_QUADS);
+	glColor3ub(255, 255, 255);
+	glVertex2f(0, 0);
+	glColor3ub(rand() % 255, rand() % 255, rand() % 255);
+	glVertex2f(0.1, 0.13);
+	glColor3ub(rand() % 255, rand() % 255, rand() % 255);
+	glVertex2f(0, 0.3);
+	glColor3ub(rand() % 255, rand() % 255, rand() % 255);
+	glVertex2f(-0.1, 0.13);
+	glEnd();
+	glPopMatrix();
+}
+
 void display()
 {
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glLineWidth(3.0f);
-	glRotatef(1, 0.001f, 0.001f, 0.001f);
-	glColor3ub(rand() % 255, rand() % 255, rand() % 255);
-
-	glBegin(GL_LINE_LOOP);
-
-	glVertex3f(-0.25f, 0.25f, 0);
-	glVertex3f(0.375f, 0, 0);
-	glVertex3f(-0.25f, -0.25f, 0);
-	glVertex3f(0, 0.375f, 0);
-	glVertex3f(0.25f, -0.25f, 0);
-	glVertex3f(-0.375f, 0, 0);
-	glVertex3f(0.25f, 0.25f, 0);
-	glVertex3f(0, -0.375f, 0);
-
-	glEnd();
+	drawTriangle(0);
+	drawTriangle(72);
+	drawTriangle(144);
+	drawTriangle(216);
+	drawTriangle(288);
 }
 
 //--------------------------------------------------------------------
